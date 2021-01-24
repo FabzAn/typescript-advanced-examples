@@ -1,4 +1,4 @@
-import { omit } from "lodash/fp";
+import { omit } from "ramda";
 
 type BData = {
   a: string;
@@ -15,4 +15,14 @@ type FKeys = Exclude<keyof FData, keyof BData>;
 
 const omitBackendProps: (
   data: FData
-) => Omit<FData, FKeys> & Record<FKeys, never> = omit(["c"]);
+) => Omit<FData, FKeys> & { [k in FKeys]?: never } = omit(["c"]);
+
+// #############################################################################
+
+const testFData: FData = {
+  a: "",
+  b: new Date(),
+  c: [""],
+};
+
+const omitted = omitBackendProps(testFData);
