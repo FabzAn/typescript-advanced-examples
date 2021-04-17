@@ -4,3 +4,12 @@ function selectionMissing<
 >(...fields: K[]): (object: T) => boolean {
   return (object): boolean => fields.some((k) => object[k].length === 0);
 }
+
+const exampleObj = {
+    a: [1,2,3],
+    b: ["a"],
+    c: [],
+};
+
+const isABorCMissing = selectionMissing("a","b","c")
+const somethingMissing = isABorCMissing(exampleObj);
