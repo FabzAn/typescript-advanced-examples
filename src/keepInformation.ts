@@ -74,3 +74,22 @@ function maybeUseful<T extends Pick<A, "commonProp">>(input: T): T {
 }
 
 const maybeUsefulA = maybeUseful(testA);
+
+// #############################################################################
+// #                                                                           #
+// #                                                                           #
+// #                                                                           #
+// #############################################################################
+
+// Also useful when objects are extended
+
+function extendObj<T extends { commonProp: string }>(
+  input: T
+): T & { newProp: string } {
+  return {
+    ...input,
+    newProp: input.commonProp + " new content",
+  };
+}
+
+const extendObjA = extendObj(testA);
