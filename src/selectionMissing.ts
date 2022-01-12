@@ -6,10 +6,11 @@ function selectionMissing<
 }
 
 const exampleObj = {
-    a: [1,2,3],
-    b: ["a"],
-    c: [],
+  a: [1, 2, 3],
+  b: ["a"],
+  c: [],
+  d: "asdf",
 };
 
-const isABorCMissing = selectionMissing("a","b","c")
+const isABorCMissing = selectionMissing("a", "b", "c");
 const somethingMissing = isABorCMissing(exampleObj);
