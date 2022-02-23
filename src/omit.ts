@@ -1,4 +1,5 @@
 import { omit } from "ramda";
+// import { omit } from "lodash/fp";
 
 type BData = {
   a: string;

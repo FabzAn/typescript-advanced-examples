@@ -10,6 +10,7 @@ const trueConst = {
 
 fakeConst.a = 2;
 // trueConst.a = 2;
+// trueConst.b.push(3);
 
 const fakeNumber = fakeConst.a;
 const trueNumber = trueConst.a;

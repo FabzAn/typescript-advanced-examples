@@ -44,7 +44,7 @@ function legitReadonlyReturn(): readonly string[] {
 
   setTimeout(() => {
     console.log(arr[0] + arr[1]);
-    // arr.sort() <- is allowed
+    // arr.sort() // <- is allowed
   }, 500);
 
   return arr;
