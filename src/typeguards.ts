@@ -139,15 +139,30 @@ type ExampleType = {
   c: null | string;
 };
 
-const exampleSpec: TypeSpec<ExampleType> = {
+const exampleTypeSpec: TypeSpec<ExampleType> = {
   a: isString,
   b: isArrayAndEveryElement(isString),
   c: isNullOr(isString),
 };
 
-const isExample = conformsTo(exampleSpec);
+const isExample = conformsTo(exampleTypeSpec);
 
-if (isExample(testValue)) {
+type ExampleRequest = {
+  status: 200 | 400;
+  errorMessage: string | null;
+  content: ExampleType[] | null;
+};
+
+const exampleRequestSpec: TypeSpec<ExampleRequest> = {
+  status: (value: unknown): value is 200 | 400 =>
+    value === 200 || value === 400,
+  errorMessage: isNullOr(isString),
+  content: isNullOr(isArrayAndEveryElement(isExample)),
+};
+
+const isExampleRequest = conformsTo(exampleRequestSpec);
+
+if (isExampleRequest(testValue)) {
   testValue;
 }
 
