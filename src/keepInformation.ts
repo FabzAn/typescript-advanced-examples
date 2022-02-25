@@ -93,3 +93,36 @@ function extendObj<T extends { commonProp: string }>(
 }
 
 const extendObjA = extendObj(testA);
+
+// #############################################################################
+// #                                                                           #
+// #                                                                           #
+// #                                                                           #
+// #############################################################################
+
+// Real world example
+
+function findAudioWithContentLinkMatching<
+  Audio extends { id: number },
+  ContentLink extends { targetId: number }
+>(
+  predicate: (contentLink: ContentLink) => boolean,
+  {
+    audios,
+    contentLinks,
+  }: {
+    audios: (Audio | null)[] | null;
+    contentLinks: (ContentLink | null)[] | null;
+  }
+) {
+  if (!audios || !contentLinks) {
+    return undefined;
+  }
+
+  return audios.find((a) => {
+    const matchingLink = contentLinks
+      .filter(isNotNull)
+      .find((cl) => a?.id === cl.targetId);
+    return matchingLink !== undefined && predicate(matchingLink);
+  });
+}

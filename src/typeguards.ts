@@ -84,6 +84,10 @@ function isDefined<T>(v: T | undefined): v is T {
   return v !== undefined;
 }
 
+function isNotNull<T>(v: T | null): v is T {
+  return v !== null;
+}
+
 const optionalValues = [1, 2, undefined, 4];
 const onlyDefinedValues = optionalValues.filter(isDefined);
 
