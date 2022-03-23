@@ -1,12 +1,12 @@
 import { omit } from "ramda";
 // import { omit } from "lodash/fp";
 
-type BData = {
+type BackendData = {
   a: string;
   b: string;
 };
 
-type FData = {
+type FrontendData = {
   a: string;
   b: Date; // Differs from BData.b
   c: string[]; // Missing on BData
@@ -18,20 +18,20 @@ type TargetType = {
   a: string;
   b: Date;
   c?: never;
-  d?: never;
+  // d?: never;
 };
 
-type FKeys = Exclude<keyof FData, keyof BData>;
+type FKeys = Exclude<keyof FrontendData, keyof BackendData>;
 
 const omitBackendProps: (
-  data: FData
-) => Omit<FData, FKeys> & { [k in FKeys]?: never } = omit(["c"]);
+  data: FrontendData
+) => Omit<FrontendData, FKeys> & { [k in FKeys]?: never } = omit(["c"]);
 
 const compareOmitBackendProps = omit(["c"]);
 
 // #############################################################################
 
-const testFData: FData = {
+const testFData: FrontendData = {
   a: "",
   b: new Date(),
   c: [""],
