@@ -114,15 +114,15 @@ function findAudioWithContentLinkMatching<
     audios: (Audio | null)[] | null;
     contentLinks: (ContentLink | null)[] | null;
   }
-) {
+): Audio | undefined {
   if (!audios || !contentLinks) {
     return undefined;
   }
 
-  return audios.find((a) => {
+  return audios.filter(isNotNull).find((a) => {
     const matchingLink = contentLinks
       .filter(isNotNull)
-      .find((cl) => a?.id === cl.targetId);
+      .find((cl) => a.id === cl.targetId);
     return matchingLink !== undefined && predicate(matchingLink);
   });
 }
